@@ -1,9 +1,34 @@
+version: "3.9"
+
 services:
   postgres:
     image: 'postgres:latest'
+    container_name: postgress
+    restart: always
     environment:
-      - 'POSTGRES_DB=mydatabase'
-      - 'POSTGRES_PASSWORD=secret'
-      - 'POSTGRES_USER=myuser'
+      - 'POSTGRES_DB=consultorio'
+      - 'POSTGRES_PASSWORD=admin'
+      - 'POSTGRES_USER=admin'
     ports:
-      - '5432'
+      - '5434:5432'
+    networks:
+      - dbNet
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  adminer:
+    image: adminer
+    container_name: phpAdmin
+    restart: always
+    networks:
+      - dbNet
+    ports:
+      - "8001:8080"
+    depends_on:
+      - postgres
+
+networks:
+  dbNet:
+
+volumes:
+  postgres-data:
