@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: webapp-consultorio
+
+  datasource:
+    url: jdbc:postgresql://postgres:5434/consultorio
+    username: admin
+    password: admin
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    database: postgresql
+
+logging:
+  level:
+    sql: debug
